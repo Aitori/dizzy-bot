@@ -1,2 +1,2 @@
-# ugip-bot
-Discord bot designed for ugip!
+# Dizzy
+Dizzy Bot designed for managing Aitori Dizzy!
