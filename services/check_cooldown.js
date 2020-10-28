@@ -20,18 +20,13 @@ const checkCooldown = (command, message) => {
 
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
-      message.reply(
-        `Please wait ${timeLeft.toFixed(1)} before trying the \`${
-          command.name
-        }\` command.`
-      );
-      return false;
+      return timeLeft;
     }
   }
 
   timestamps.set(message.author.id, now);
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-  return true;
+  return null;
 };
 
 export default checkCooldown;

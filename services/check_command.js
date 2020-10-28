@@ -1,5 +1,3 @@
-import users from '../collections/users';
-
 const checkCommand = (command, message, args, prefix) => {
   if (!command) return 'Command not found!';
 
@@ -20,13 +18,6 @@ const checkCommand = (command, message, args, prefix) => {
     !command.categories.includes(message.channel.parent.name)
   ) {
     return `Can't use \`${command.name}\` in this category!`;
-  }
-
-  if (command.charRequired) {
-    const user = users.get(message.author.id);
-    if (!user) {
-      return `You have not created a character yet! Use /createcharacter to start!`;
-    }
   }
   // check for validity in roles
   if (

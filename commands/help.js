@@ -3,7 +3,7 @@ import commands from '../collections/commands';
 
 module.exports = {
 	name: 'help',
-	description: 'List all of my commands or info about a specific command.',
+	description: 'List all commands or info about a specific command.',
 	aliases: ['commands'],
 	usage: '[commandName]',
 	cooldown: 10,
@@ -11,7 +11,7 @@ module.exports = {
 		const data = [];
 
 		if (!args.length) {
-			data.push('Ugip Ugip Commands:');
+			data.push('Dizzy Commands:');
 			data.push(commands.map(command => command.name).join(' | '));
 			data.push(`\nUse \`${prefix}help [command]\` for more info!`);
 
@@ -30,7 +30,7 @@ module.exports = {
 		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
 		if (!command) {
-			return message.reply('Ugip Ugip Command not found :(');
+			return message.reply('Dizzy Command not found :(');
 		}
 
 		data.push(`**Command:** ${command.name}`);
