@@ -40,7 +40,7 @@ client.on('message', async (message) => {
   const timeLeft = checkCooldown(command, message);
   if (timeLeft != null) {
     message.reply(
-      `Please wait ${timeLeft.toFixed(2)} before trying the \`${command.name}\` command.`
+      `Please wait ${timeLeft.toFixed(1)} before trying the \`${command.name}\` command.`
     );
   }
 
