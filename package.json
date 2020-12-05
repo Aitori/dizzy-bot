@@ -6,12 +6,20 @@
   "author": "Michael Zhou",
   "dependencies": {
     "discord.js": "^12.4.1",
-    "eslint": "^7.12.1",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.4",
-    "prettier": "^2.1.2"
+    "mongoose": "^5.11.4"
   },
   "scripts": {
-    "start": "node bot.js"
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/bot.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.10",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.1.0",
+    "typescript": "^4.1.2",
+    "prettier": "^2.1.2",
+    "eslint": "^7.12.1"
   }
 }

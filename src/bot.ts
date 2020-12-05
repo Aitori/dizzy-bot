@@ -1,16 +1,15 @@
-'use strict';
 // require discord for obvious reasons
-const Discord = require('discord.js');
+import { Client, Message } from 'discord.js';
 // require configuration
-const config = require('./config.json');
+const config = require('../config.json');
 // service imports
 const checkCommand = require('./services/check_command');
 const checkCooldown = require('./services/check_cooldown');
 // collection imports
-const commands = require('./collections/commands');
+import commands from './collections/commands';
 
 // initialize important things
-const client = new Discord.Client();
+const client: Client = new Client();
 
 // client listener for ready
 client.once('ready', async () => {
@@ -18,14 +17,14 @@ client.once('ready', async () => {
 });
 
 // on message listener
-client.on('message', async (message) => {
+client.on('message', async (message: Message) => {
   // if the message was by bot or isn't a command, exit
   if (message.author.bot) return;
   if (!message.content.startsWith(config.prefix)) return;
   // parse the message string
   const args = message.content.slice(config.prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
-  const command =
+  const command: Command =
     commands.get(commandName) ||
     commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 

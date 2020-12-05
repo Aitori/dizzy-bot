@@ -29,4 +29,4 @@ const checkCooldown = (command, message) => {
   return null;
 };
 
-module.exports = { checkCooldown };
+module.exports = checkCooldown;
