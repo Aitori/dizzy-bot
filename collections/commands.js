@@ -1,5 +1,5 @@
-import Discord from 'discord.js';
-import fs from 'fs';
+const Discord = require('discord.js');
+const fs = require('fs');
 
 const commands = new Discord.Collection();
 const commandFiles = fs.readdirSync('./commands').filter((file) => file.endsWith('.js'));

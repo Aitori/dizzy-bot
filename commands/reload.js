@@ -1,4 +1,4 @@
-import commands from '../collections/commands';
+const commands = require('../collections/commands');
 
 module.exports = {
 	name: 'reload',

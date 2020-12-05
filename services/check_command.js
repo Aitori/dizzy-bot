@@ -48,4 +48,4 @@ const checkCommand = (command, message, args, prefix) => {
   return null;
 };
 
-export default checkCommand;
+module.exports = { checkCommand };

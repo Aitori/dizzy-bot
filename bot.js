@@ -1,13 +1,13 @@
 'use strict';
 // require discord for obvious reasons
-import Discord from 'discord.js';
+const Discord = require('discord.js');
 // require configuration
-import { prefix, token } from './config.json';
+const config = require('./config.json');
 // service imports
-import checkCommand from './services/check_command';
-import checkCooldown from './services/check_cooldown';
+const checkCommand = require('./services/check_command');
+const checkCooldown = require('./services/check_cooldown');
 // collection imports
-import commands from './collections/commands';
+const commands = require('./collections/commands');
 
 // initialize important things
 const client = new Discord.Client();
@@ -21,16 +21,16 @@ client.once('ready', async () => {
 client.on('message', async (message) => {
   // if the message was by bot or isn't a command, exit
   if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
+  if (!message.content.startsWith(config.prefix)) return;
   // parse the message string
-  const args = message.content.slice(prefix.length).trim().split(/ +/);
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/);
   const commandName = args.shift().toLowerCase();
   const command =
     commands.get(commandName) ||
     commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 
   // check if command is valid
-  const commandValid = checkCommand(command, message, args, prefix);
+  const commandValid = checkCommand(command, message, args, config.prefix);
   if (commandValid != null) {
     message.reply(commandValid);
     return;
@@ -53,4 +53,4 @@ client.on('message', async (message) => {
   }
 });
 
-client.login(token);
+client.login(config.token);

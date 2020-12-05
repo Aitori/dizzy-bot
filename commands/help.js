@@ -1,5 +1,5 @@
-import { prefix } from '../config.json';
-import commands from '../collections/commands';
+const config = require('../config.json');
+const commands = require('../collections/commands');
 
 module.exports = {
 	name: 'help',
@@ -13,7 +13,7 @@ module.exports = {
 		if (!args.length) {
 			data.push('Dizzy Commands:');
 			data.push(commands.map(command => command.name).join(' | '));
-			data.push(`\nUse \`${prefix}help [command]\` for more info!`);
+			data.push(`\nUse \`${config.prefix}help [command]\` for more info!`);
 
 			return message.author.send(data, { split: true })
 				.then(() => {
@@ -37,7 +37,7 @@ module.exports = {
 
 		if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
 		if (command.description) data.push(`**Description:** ${command.description}`);
-		if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
+		if (command.usage) data.push(`**Usage:** ${config.prefix}${command.name} ${command.usage}`);
 
 		data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
 

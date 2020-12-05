@@ -1,4 +1,4 @@
-import Discord from 'discord.js';
+const Discord = require('discord.js');
 
 const cooldowns = new Discord.Collection();
 
@@ -29,4 +29,4 @@ const checkCooldown = (command, message) => {
   return null;
 };
 
-export default checkCooldown;
+module.exports = { checkCooldown };
