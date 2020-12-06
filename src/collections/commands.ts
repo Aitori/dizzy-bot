@@ -1,6 +1,7 @@
 import { Collection } from 'discord.js';
 import fs = require('fs');
 import path = require('path');
+import { Command } from 'src/types';
 
 const commands = new Collection<string, Command>();
 const dirPath = path.resolve(__dirname, '../commands');

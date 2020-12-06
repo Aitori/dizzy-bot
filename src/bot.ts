@@ -1,12 +1,13 @@
 // require discord for obvious reasons
 import { Client, Message } from 'discord.js';
 // require configuration
-const config = require('../config.json');
+import config from './config.json';
 // service imports
-const checkCommand = require('./services/check_command');
-const checkCooldown = require('./services/check_cooldown');
+import checkCommand from './services/check_command';
+import checkCooldown from './services/check_cooldown';
 // collection imports
 import commands from './collections/commands';
+import { Command } from './types';
 
 // initialize important things
 const client: Client = new Client();

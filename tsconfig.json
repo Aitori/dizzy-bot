@@ -5,8 +5,14 @@
     "target": "es5",
     "baseUrl": ".",
     "rootDir": "src",
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
     "paths": {
-      "*": ["./types/*"]
+      "src/*": [
+        "./src/*"
+      ],
     }
   },
   "include": ["./src/**/*"]
