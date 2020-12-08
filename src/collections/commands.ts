@@ -5,7 +5,7 @@ import { Command } from 'src/types';
 
 const commands = new Collection<string, Command>();
 const dirPath = path.resolve(__dirname, '../commands');
-const commandFiles = fs.readdirSync(dirPath).filter((file) => file.endsWith('.js'));
+const commandFiles = fs.readdirSync(dirPath).filter((file) => file.endsWith('.ts'));
 
 for (const file of commandFiles) {
   const command = require(`../commands/${file}`);

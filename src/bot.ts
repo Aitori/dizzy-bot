@@ -7,6 +7,7 @@ import checkCommand from './services/check_command';
 import checkCooldown from './services/check_cooldown';
 // collection imports
 import commands from './collections/commands';
+// type import
 import { Command } from './types';
 
 // initialize important things
@@ -14,7 +15,7 @@ const client: Client = new Client();
 
 // client listener for ready
 client.once('ready', async () => {
-  console.log('Ugip Ugip Lets Roll!');
+  console.log('Aitori Dizzy Bot Ready');
 });
 
 // on message listener
@@ -23,21 +24,21 @@ client.on('message', async (message: Message) => {
   if (message.author.bot) return;
   if (!message.content.startsWith(config.prefix)) return;
   // parse the message string
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/);
-  const commandName = args.shift().toLowerCase();
+  const args: string[] = message.content.slice(config.prefix.length).trim().split(/ +/);
+  const commandName: string = args.shift().toLowerCase();
   const command: Command =
     commands.get(commandName) ||
     commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 
   // check if command is valid
-  const commandValid = checkCommand(command, message, args, config.prefix);
+  const commandValid: string = checkCommand(command, message, args, config.prefix);
   if (commandValid != null) {
     message.reply(commandValid);
     return;
   }
 
   // check for cooldown of command
-  const timeLeft = checkCooldown(command, message);
+  const timeLeft: number = checkCooldown(command, message);
   if (timeLeft != null) {
     message.reply(
       `Please wait ${timeLeft.toFixed(1)} before trying the \`${command.name}\` command.`

@@ -1,4 +1,12 @@
-const checkCommand = (command, message, args, prefix) => {
+import { DMChannel, Message } from 'discord.js';
+import { Command } from 'src/types';
+
+const checkCommand = (
+  command: Command,
+  message: Message,
+  args: string[],
+  prefix: string
+): string => {
   if (!command) return 'Command not found!';
 
   // if the command is server only and is text, exit
@@ -7,15 +15,21 @@ const checkCommand = (command, message, args, prefix) => {
   }
 
   // check if command is allowed to be use in channel
-  if (command.guildOnly && command.channels && !command.channels.includes(message.channel.name)) {
+  if (
+    command.guildOnly &&
+    command.channels &&
+    !(message.channel instanceof DMChannel) &&
+    !command.channels.includes(message.channel.name)
+  ) {
     return `Can't use \`${command.name}\` in this channel!`;
   }
 
   // check if categroy is valid
   if (
     command.guildOnly &&
-    command.categories &&
-    !command.categories.includes(message.channel.parent.name)
+    command.category &&
+    !(message.channel instanceof DMChannel) &&
+    !command.category.includes(message.channel.parent.name)
   ) {
     return `Can't use \`${command.name}\` in this category!`;
   }
@@ -29,7 +43,7 @@ const checkCommand = (command, message, args, prefix) => {
         if (v.name == role) found = true;
       });
       return found;
-    }) == 0
+    }).length === 0
   ) {
     return `Can't use \`${command.name}\` no permissions!`;
   }
