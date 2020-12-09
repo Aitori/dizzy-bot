@@ -1,11 +1,13 @@
-const Discord = require('discord.js');
+import { Command } from 'src/types';
 
-const cooldowns = new Discord.Collection();
+import { Collection, Message } from 'discord.js';
 
-const checkCooldown = (command, message) => {
+const cooldowns = new Collection<string, Collection<string, number>>();
+
+const checkCooldown = (command: Command, message: Message) => {
   // if cooldown dictionary doesn't exist
   if (!cooldowns.has(command.name)) {
-    cooldowns.set(command.name, new Discord.Collection());
+    cooldowns.set(command.name, new Collection());
   }
 
   // set up cooldown variables

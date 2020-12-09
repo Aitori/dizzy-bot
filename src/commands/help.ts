@@ -1,5 +1,5 @@
-const config = require('../config.json');
-const commands = require('../collections/commands');
+import config from '../config.json';
+import commands from '../collections/commands';
 
 module.exports = {
 	name: 'help',
