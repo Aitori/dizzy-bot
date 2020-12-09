@@ -9,6 +9,7 @@ import checkCooldown from './services/check_cooldown';
 import commands from './collections/commands';
 // type import
 import { Command } from './types';
+import mongoose from 'mongoose';
 
 // initialize important things
 const client: Client = new Client();
@@ -16,6 +17,17 @@ const client: Client = new Client();
 // client listener for ready
 client.once('ready', async () => {
   console.log('Aitori Dizzy Bot Ready');
+  mongoose
+    .connect(config.mongoDB, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+    .then(() => {
+      console.log('Connected to mongo!');
+    })
+    .catch((error) => {
+      console.log('Error connecting to mongo: ' + error);
+    });
 });
 
 // on message listener

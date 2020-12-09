@@ -1,6 +1,12 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
-module.exports = mongoose.model("User", new mongoose.Schema({
+const userModel: mongoose.Model<mongoose.Document> = mongoose.model(
+  'User',
+  new mongoose.Schema({
     id: { type: String },
-    registeredAt: { type: Number, default: Date.now() },
-}));
+    currency: { type: Number, default: 0 },
+    registeredAt: { type: Number, default: Date.now() }
+  })
+);
+
+export default userModel;
