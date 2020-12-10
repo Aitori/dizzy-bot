@@ -13,4 +13,20 @@ const getUserDatabase = async (uid: string) => {
   }
 };
 
-export default getUserDatabase;
+const updateUserPoints = async (uid: string) => {
+  usersDatabase.findOneAndUpdate(
+    { id: uid },
+    { $inc: { points: 1 } },
+    {
+      upsert: true,
+      useFindAndModify: false
+    },
+    (error) => {
+      if (error) {
+        console.log(error);
+      }
+    }
+  );
+};
+
+export { getUserDatabase, updateUserPoints };

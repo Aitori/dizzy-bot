@@ -10,6 +10,7 @@ import commands from './collections/commands';
 // type import
 import { Command } from './types';
 import mongoose from 'mongoose';
+import { updateUserPoints } from './database/db';
 
 // initialize important things
 const client: Client = new Client();
@@ -56,7 +57,8 @@ client.on('message', async (message: Message) => {
       `Please wait ${timeLeft.toFixed(1)} before trying the \`${command.name}\` command.`
     );
   }
-
+  // ugh
+  updateUserPoints(message.author.id);
   // execute command!
   try {
     command.execute(message, args);
