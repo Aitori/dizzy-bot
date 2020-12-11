@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const userModel: mongoose.Model<mongoose.Document> = mongoose.model(
+const inventoryModel: mongoose.Model<mongoose.Document> = mongoose.model(
   'Inventory',
   new mongoose.Schema({
     id: { type: String, ref: 'User'},
@@ -9,4 +9,4 @@ const userModel: mongoose.Model<mongoose.Document> = mongoose.model(
   })
 );
 
-export default userModel;
+export default inventoryModel;
