@@ -1,11 +1,11 @@
-import usersDatabase from './schema/user';
+import { userModel } from '.';
 
 const getUserDatabase = async (uid: string) => {
-  let user = await usersDatabase.findOne({ id: uid });
+  let user = await userModel.findOne({ id: uid });
   if (user) {
     return user;
   } else {
-    user = new usersDatabase({
+    user = new userModel({
       id: uid
     });
     await user.save().catch((error) => console.log(error));
@@ -14,7 +14,7 @@ const getUserDatabase = async (uid: string) => {
 };
 
 const updateUserPoints = async (uid: string) => {
-  usersDatabase.findOneAndUpdate(
+  userModel.findOneAndUpdate(
     { id: uid },
     { $inc: { points: 1 } },
     {

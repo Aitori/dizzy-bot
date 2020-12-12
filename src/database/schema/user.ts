@@ -10,4 +10,4 @@ const userModel: mongoose.Model<mongoose.Document> = mongoose.model(
   })
 );
 
-export default userModel;
+export { userModel };

@@ -1,3 +1,5 @@
+import { Message } from "discord.js";
+
 export interface Command {
   name: string;
   description: string;
@@ -9,5 +11,5 @@ export interface Command {
   category?: Array<string>;
   cooldown?: number;
   guildOnly?: boolean;
-  execute(message, args): void;
+  execute(message: Message, args: string[]): void;
 }

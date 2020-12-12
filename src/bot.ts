@@ -8,7 +8,7 @@ import checkCooldown from './services/check_cooldown';
 // collection imports
 import commands from './collections/commands';
 // type import
-import { Command } from './types';
+import { Command } from 'src/types';
 import mongoose from 'mongoose';
 import { updateUserPoints } from './database/db';
 

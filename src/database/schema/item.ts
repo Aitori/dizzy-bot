@@ -11,4 +11,4 @@ const itemModel: mongoose.Model<mongoose.Document> = mongoose.model(
   })
 );
 
-export default itemModel;
+export { itemModel };

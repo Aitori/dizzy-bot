@@ -8,4 +8,4 @@ const dropModel: mongoose.Model<mongoose.Document> = mongoose.model(
   })
 );
 
-export default dropModel;
+export { dropModel };
