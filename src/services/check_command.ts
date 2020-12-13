@@ -14,25 +14,6 @@ const checkCommand = (
     return "Can't use this here...";
   }
 
-  // check if command is allowed to be use in channel
-  if (
-    command.guildOnly &&
-    command.channels &&
-    !(message.channel instanceof DMChannel) &&
-    !command.channels.includes(message.channel.name)
-  ) {
-    return `Can't use \`${command.name}\` in this channel!`;
-  }
-
-  // check if categroy is valid
-  if (
-    command.guildOnly &&
-    command.category &&
-    !(message.channel instanceof DMChannel) &&
-    !command.category.includes(message.channel.parent.name)
-  ) {
-    return `Can't use \`${command.name}\` in this category!`;
-  }
   // check for validity in roles
   if (
     command.guildOnly &&
@@ -48,17 +29,6 @@ const checkCommand = (
     return `Can't use \`${command.name}\` no permissions!`;
   }
 
-  // check args
-  if (command.args && !args.length) {
-    // if args are not up to par
-    let reply = `No arguments? ${message.author.username}`;
-
-    if (command.usage) {
-      reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
-    }
-
-    return reply;
-  }
   return null;
 };
 

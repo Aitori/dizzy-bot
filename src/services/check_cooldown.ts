@@ -9,7 +9,7 @@ const checkCooldown = (command: Command, message: Message) => {
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Collection());
   }
-
+ 
   // set up cooldown variables
   const now = Date.now();
   const defaultCooldown = 0;
