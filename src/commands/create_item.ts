@@ -1,12 +1,14 @@
 import { Message } from 'discord.js';
-import { itemModel } from '../database';
+import { create_item } from '../database/db';
+import { Command } from '../types';
 
-module.exports = {
+const command: Command = {
   name: 'create_item',
   description: 'Creates an item.',
   aliases: ['ci'],
   usage: '[ci item_id item_name imageUrl cost]',
-  roles: '[Admin]',
+  roles: ['Admin'],
+  guildOnly: false,
   execute(message: Message, args: string[]) {
     // args: [item_id item_name imageUrl cost]
     if (args.length !== 4) {
@@ -15,16 +17,10 @@ module.exports = {
       );
       return;
     }
-    const cost = parseFloat(args[3]);
-    const new_item = new itemModel({
-      item_id: args[0],
-      name: args[1],
-      description: "Default Description",
-      imageUrl: args[2],
-      cost: cost
-    });
-    new_item.save((error) => {
-      if (error) return console.error(error);
-    });
+    const item_id = parseInt(args[0]);
+    const cost = parseInt(args[3]);
+    create_item(item_id, args[1], args[2], cost);
   }
 };
+
+export { command };

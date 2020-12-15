@@ -1,32 +1,24 @@
 import { Message } from 'discord.js';
-import { dropModel, itemModel } from '../database';
+import { drop_model, item_model } from '../database';
+import { get_drops_gacha, get_item } from '../database/db';
 import WeightedPick from '../services/weighted_pick';
-import { Item } from 'src/types';
 
 module.exports = {
   name: 'roll',
   description: 'Rolls for an item!',
   aliases: ['r'],
-  usage: '[roll]',
+  usage: '[roll gacha]',
   roles: '[Admin]',
-  async execute(message: Message) {
-    let drops = [];
-    const allDrops = dropModel.find({});
-    await allDrops.then((items) => (drops = items));
-    const modified = drops.map((d) => {
-      return {
-        item_id: d.item_id,
-        weight: d.weight
-      };
-    });
-    const pick = WeightedPick(modified);
-    const item_query = itemModel.find({ item_id: pick });
-    await item_query.then((items) => (drops = items));
+  async execute(message: Message, args: string[]) {
+    // args: [gacha]
+    const drops = await get_drops_gacha(args[0])
+    const pick = WeightedPick(drops);
+    const item = await get_item(pick);
     const embed = {
-      title: drops[0].name,
+      title: item.name,
       color: 937505,
       image: {
-        url: drops[0].imageUrl
+        url: item.imageUrl
       },
       author: {
         name: 'author name',

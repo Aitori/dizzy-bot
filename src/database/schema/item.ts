@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import { Item } from '../../types';
 
-const itemModel: mongoose.Model<mongoose.Document> = mongoose.model(
+const item_model: mongoose.Model<Item> = mongoose.model(
   'Item',
   new mongoose.Schema({
     item_id: { type: Number },
@@ -10,4 +11,4 @@ const itemModel: mongoose.Model<mongoose.Document> = mongoose.model(
   })
 );
 
-export { itemModel };
+export { item_model };

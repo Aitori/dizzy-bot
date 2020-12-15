@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface Item {
+export interface Item extends Document{
   item_id: number;
   name: string;
   imageUrl: string;

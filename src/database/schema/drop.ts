@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
+import { Drop } from '../../types';
 
-const dropModel: mongoose.Model<mongoose.Document> = mongoose.model(
+const drop_model: mongoose.Model<Drop> = mongoose.model(
   'Drop',
   new mongoose.Schema({
     item_id: { type: Number, ref: 'Item' },
@@ -9,4 +10,4 @@ const dropModel: mongoose.Model<mongoose.Document> = mongoose.model(
   })
 );
 
-export { dropModel };
+export { drop_model };

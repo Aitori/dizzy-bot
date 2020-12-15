@@ -1,28 +1,24 @@
 import { Message } from 'discord.js';
-import { dropModel } from '../database';
+import { drop_model } from '../database';
+import { create_drop } from '../database/db';
 import { Command } from '../types';
 
 const command: Command = {
   name: 'create_drop',
   description: 'Adds item to drop',
   aliases: ['cd'],
-  usage: '[cd item_id weight]',
+  usage: '[cd item_id weight gacha]',
   roles: ['Admin'],
   guildOnly: false,
   execute(message: Message, args: string[]) {
-    // args: [item_id item_name imageUrl cost]
+    // args: [item_id weight gacha]
     if (args.length !== 2) {
       message.reply('Wrong number of arguments. Should be 2 for [cd item_id weight]');
       return;
     }
-    const weight = parseFloat(args[1]);
-    const new_drop = new dropModel({
-      item_id: args[0],
-      weight: weight
-    });
-    new_drop.save((error) => {
-      if (error) return console.error(error);
-    });
+    const item_id = parseInt(args[0]);
+    const weight = parseInt(args[1]);
+    create_drop(item_id, weight, args[2]);
   }
 };
 
