@@ -4,7 +4,8 @@ const dropModel: mongoose.Model<mongoose.Document> = mongoose.model(
   'Drop',
   new mongoose.Schema({
     item_id: { type: Number, ref: 'Item' },
-    weight: { type: Number, default: 1 }
+    weight: { type: Number, default: 1 },
+    gacha: { type: String }
   })
 );
 
