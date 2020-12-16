@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
+import { Inventory } from '../../types/core/inventory';
 
-const inventory_model: mongoose.Model<mongoose.Document> = mongoose.model(
+const inventory_model: mongoose.Model<Inventory> = mongoose.model(
   'Inventory',
   new mongoose.Schema({
-    id: { type: String, ref: 'User' },
+    uid: { type: String, ref: 'User' },
     item_id: { type: Number },
-    count: { type: Number, default: 1 }
+    count: { type: Number, default: 0 }
   })
 );
 

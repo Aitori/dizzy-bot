@@ -1,20 +1,27 @@
-module.exports = {
-	name: 'prune',
-	description: 'Prune up to 99 messages.',
-	guildOnly: true,
-	roles: ['Admin'],
-	execute(message, args) {
-		const amount = parseInt(args[0]) + 1;
+import { DMChannel, Message } from 'discord.js';
+import { Command } from '../types';
 
-		if (isNaN(amount)) {
-			return message.reply('Invalid Number');
-		} else if (amount <= 1 || amount > 100) {
-			return message.reply('1-99 Please!');
-		}
+const command: Command = {
+  name: 'prune',
+  description: 'Prune up to 99 messages.',
+  guildOnly: true,
+  usage: '[prune [number]]',
+  roles: ['Admin'],
+  execute(message: Message, args: string[]) {
+    const amount = parseInt(args[0]) + 1;
 
-		message.channel.bulkDelete(amount, true).catch(err => {
-			console.error(err);
-			message.channel.send('ERR!');
-		});
-	},
+    if (isNaN(amount)) {
+      return message.reply('Invalid Number');
+    } else if (amount <= 1 || amount > 100) {
+      return message.reply('1-99 Please!');
+    }
+    if (!(message.channel instanceof DMChannel)) {
+      message.channel.bulkDelete(amount, true).catch((err) => {
+        console.error(err);
+        message.channel.send('ERR!');
+      });
+    }
+  }
 };
+
+module.exports = command;

@@ -16,7 +16,7 @@ const checkCommand = (
 
   // check for validity in roles
   if (
-    command.guildOnly &&
+    message.guild != null &&
     command.roles &&
     command.roles.filter((role) => {
       let found = false;

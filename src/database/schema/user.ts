@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
+import { User } from '../../types';
 
-const user_model: mongoose.Model<mongoose.Document> = mongoose.model(
+const user_model: mongoose.Model<User> = mongoose.model(
   'User',
   new mongoose.Schema({
-    id: { type: String },
-    currency: { type: Number, default: 0 },
+    uid: { type: String },
+    points: { type: Number, default: 0 },
     registeredAt: { type: Number, default: Date.now() }
   })
 );

@@ -1,11 +1,14 @@
+import { Message } from 'discord.js';
 import commands from '../collections/commands';
+import { Command } from '../types';
 
-module.exports = {
+const command: Command = {
   name: 'reload',
   description: 'Reloads a command',
-  args: true,
+  guildOnly: true,
+  usage: '[reload command]',
   roles: ['Admin'],
-  execute(message, args) {
+  execute(message: Message, args: string[]) {
     const commandName = args[0].toLowerCase();
     const command =
       commands.get(commandName) ||
@@ -31,3 +34,5 @@ module.exports = {
     }
   }
 };
+
+module.exports = command;

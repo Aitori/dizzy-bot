@@ -7,7 +7,8 @@ const item_model: mongoose.Model<Item> = mongoose.model(
     item_id: { type: Number },
     name: { type: String },
     imageUrl: { type: String },
-    cost: { type: Number }
+    cost: { type: Number },
+    tier: { type: Number }
   })
 );
 

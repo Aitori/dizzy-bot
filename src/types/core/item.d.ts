@@ -5,4 +5,5 @@ export interface Item extends Document{
   name: string;
   imageUrl: string;
   cost: number;
+  tier: number;
 }

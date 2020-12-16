@@ -4,7 +4,7 @@ import { Collection, Message } from 'discord.js';
 
 const cooldowns = new Collection<string, Collection<string, number>>();
 
-const checkCooldown = (command: Command, message: Message) => {
+const checkCooldown = (command: Command, message: Message): number => {
   // if cooldown dictionary doesn't exist
   if (!cooldowns.has(command.name)) {
     cooldowns.set(command.name, new Collection());
