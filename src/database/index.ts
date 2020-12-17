@@ -5,3 +5,5 @@ export * from './schema/drop';
 export * from './schema/inventory';
 
 export * from './schema/user';
+
+export * from './schema/gacha';

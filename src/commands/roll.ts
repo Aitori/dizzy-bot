@@ -1,5 +1,12 @@
 import { Message, MessageReaction } from 'discord.js';
-import { get_tiers_gacha, get_items_tier, add_to_inventory } from '../database/db';
+import {
+  get_tiers_gacha,
+  get_items_tier,
+  add_to_inventory,
+  get_gacha,
+  get_user,
+  user_add_points
+} from '../database/db';
 import { send_item_embed } from '../services/send_item_embed';
 import WeightedPick from '../services/weighted_pick';
 import { Command } from '../types';
@@ -9,13 +16,27 @@ const command: Command = {
   description: 'Rolls for an item!',
   aliases: ['r'],
   usage: '[roll gacha]',
-  guildOnly: false,
+  guildOnly: true,
   async execute(message: Message, args: string[]) {
     // args: [gacha]
     if (args.length !== 1) {
       message.reply('Wrong number of arguments. Should be 1 for [roll gacha]');
       return;
     }
+    // check if gacha exists
+    const gacha = await get_gacha(args[0]);
+    if (!gacha) {
+      message.reply('Gacha does not exist!');
+      return;
+    }
+    // check if user has enough currency
+    const user = await get_user(message.author.id);
+    if (user.points < gacha.cost) {
+      message.reply('Not enough moneys :(');
+      return;
+    }
+    // if enough money then do the subtractionsssss
+    user_add_points(message.author.id, -gacha.cost);
     // Collects all drops given the certain gacha
     const drops = await get_tiers_gacha(args[0]);
     if (drops.length < 1) {

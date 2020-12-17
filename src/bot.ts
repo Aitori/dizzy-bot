@@ -55,6 +55,7 @@ client.on('message', async (message: Message) => {
     message.reply(
       `Please wait ${timeLeft.toFixed(0)} dollars before using \`${command.name}\` again.`
     );
+    return;
   }
   // execute command!
   try {
